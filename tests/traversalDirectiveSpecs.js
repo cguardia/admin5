@@ -26,11 +26,6 @@ describe("Hello World Directives 1", function () {
             expect(element.hasClass("plain")).toBe(true);
         });
 
-        it("should respond to a click", function () {
-            element.triggerHandler("click");
-            expect(element.hasClass("clicked")).toBe(true);
-        });
-
     });
 
 });
