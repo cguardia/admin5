@@ -2,10 +2,20 @@
 <html>
 <head>
     <title>Traversal View</title>
+    <style>
+        .plain {
+            font-family: courier, monospace, serif;
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
 <div ng-app="TraverserApp">
+
+    <p>
+        <div trv-view>Simple</div>
+    </p>
     <a href="#/">Home Page</a> | <a href="#/cats">Cats</a>
 
     <div ng-multi-view="content"></div>

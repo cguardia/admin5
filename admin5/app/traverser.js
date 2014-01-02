@@ -54,3 +54,18 @@ traversal.service("traverser", function ($http) {
         return this.views[0];
     };
 });
+
+traversal.directive("trvView", function () {
+    return {
+        link: linkFn
+    };
+
+    function linkFn(scope, element) {
+        element.addClass("plain");
+
+        element.bind("click", function () {
+            scope.clicked = true;
+            element.addClass("clicked");
+        });
+    }
+});

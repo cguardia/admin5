@@ -1,11 +1,5 @@
 var multiview = angular.module("MultiViewApp", ['MultiViewDirectives']);
 
-multiview.service("multiviewService", function () {
-    this.getName = function (name) {
-        return name + " Smith";
-    }
-});
-
 multiview.value('MultiViewPaths',
                 {'/': {
                     content: {
@@ -29,13 +23,15 @@ multiview.value('MultiViewPaths',
                 });
 
 
-
 /* creating the controllers and their data */
 multiview.controller('ListUsersCtrl', ['$scope', function ($scope) {
     $scope.users = ['Lord Nikon', 'Acid Burn', 'Crash Override'];
 }]);
 
-multiview.value('cats', ['Toonces', 'Stache', 'Americat', 'Cassiopeia', 'Puck', 'Dica', 'Vivian', 'Shosh', 'Gray', 'Bashful', 'Querida', 'Ignatowski', 'Aenias', 'Ramsay', 'Ishcabible', 'Guinness', 'Roux', 'Gefahr']);
+multiview.value('cats', ['Toonces', 'Stache', 'Americat', 'Cassiopeia',
+    'Puck', 'Dica', 'Vivian', 'Shosh', 'Gray', 'Bashful', 'Querida',
+    'Ignatowski', 'Aenias', 'Ramsay', 'Ishcabible', 'Guinness',
+    'Roux', 'Gefahr']);
 
 multiview.controller('ListCatsCtrl', ['$scope', 'cats', function ($scope, cats) {
     $scope.cats = cats;
