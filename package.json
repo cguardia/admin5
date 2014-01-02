@@ -1,0 +1,27 @@
+{
+    "name": "admin5",
+    "description": "KARL admin UI",
+    "version": "0.1.0r",
+    "author": "The KARL Team",
+    "engines": [
+        "node"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:karlproject/admin5.git"
+    },
+    "devDependencies": {
+        "bower": "*",
+        "grunt": "0.4.1",
+        "grunt-cli": "0.1.6",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-clean": "0.4.0",
+        "grunt-contrib-copy": "*",
+        "grunt-karma": "*",
+        "karma-chrome-launcher": "*",
+        "phantomjs": "*",
+        "karma-phantomjs-launcher": "*",
+        "karma-coverage": "*",
+        "protractor": "*"
+    }
+}
