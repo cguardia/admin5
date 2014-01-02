@@ -17,36 +17,31 @@ describe("Traverser Service", function () {
     });
 
     describe("Traverser exists", function () {
-        it("should have counter and getName", function () {
-            expect(traverser.counter).toBeDefined();
-            expect(angular.isFunction(traverser.getName)).toBe(true);
-        });
-    });
-
-    describe("Traverser", function () {
-        it("should append Smith to string", function () {
-            expect(traverser.counter).toBe(0);
-            expect(traverser.getName("John")).toBe("John Smith");
-            expect(traverser.counter).toBe(1);
+        it("should have siteData and loadData", function () {
+            expect(traverser.siteData).toBeDefined();
+            expect(angular.isFunction(traverser.loadData)).toBe(true);
         });
     });
 
     describe("Traverser loads HTTP data", function () {
 
-        it('should send the msg and return the response.', function () {
-            //set up some data for the http call to return and test later.
-            var returnData = { excited: true };
+        var returnData, url;
 
-            //expectGET to make sure this is called once.
-            httpBackend.expectGET('somthing.json?msg=wee').respond(returnData);
+        it('Correctly load the data and store result', function () {
 
+            // Mock the HTTP call
+            returnData = { sections: [1, 2, 3] };
+            url = '/site_data.json';
+            httpBackend.expectGET(url).respond(returnData);
+
+            // Load the data
             var result = null;
-            traverser.sendMessage('wee').then(function (data) {
+            traverser.loadData(url).then(function (data) {
                 result = data;
             });
             httpBackend.flush();
 
-            expect(result.data.excited).toBe(true);
+            expect(result.data.sections).toEqual([1, 2, 3]);
         });
 
     });
