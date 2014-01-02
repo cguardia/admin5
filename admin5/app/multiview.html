@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>Learning AngularJS</title>
+</head>
+<body>
+
+<div ng-app="MultiViewApp">
+    <a href="#/">Home Page</a> | <a href="#/cats">Cats</a>
+
+    <div ng-multi-view="content"></div>
+    <div ng-multi-view="secondaryContent"></div>
+</div>
+
+<script src="../lib/admin5_lib.js"></script>
+<script src="directives.js"></script>
+<script src="multiview.js"></script>
+</body>
+</html>

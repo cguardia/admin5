@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>Traversal View</title>
+</head>
+<body>
+
+<div ng-app="TraverserApp">
+    <a href="#/">Home Page</a> | <a href="#/cats">Cats</a>
+
+    <div ng-multi-view="content"></div>
+    <div ng-multi-view="secondaryContent"></div>
+</div>
+
+<script src="../lib/admin5_lib.js"></script>
+<script src="traverser.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
