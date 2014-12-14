@@ -1,9 +1,0 @@
-<configure xmlns="http://pylonshq.com/pyramid">
-
-    <include package=".views"/>
-    <static
-            name="admin5_static"
-            path="admin5:views/static"
-            />
-
-</configure>
