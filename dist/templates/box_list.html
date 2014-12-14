@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-md-10">
+    <h1>Archive to Box</h1>
+  </div>
+  <div class="col-md-1">
+    <button id="reload" class="btn btn-default btn-sm"
+            ng-click="ctrl.reload()"
+        >
+      Reload
+    </button>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-3">
+
+    <h5 class="text-muted">Filters</h5>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"
+               ng-model="ctrl.isInactive"
+               ng-change="ctrl.reload()"> Only over 18 months
+      </label>
+    </div>
+    <div class="input-group">
+      <input type="text" class="form-control input-xs"
+             ng-model="ctrl.filterText"
+             placeholder="Title contains...">
+
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default"
+                ng-click="ctrl.reload()">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </div>
+      <!-- /btn-group -->
+    </div>
+  </div>
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+      <th>Name</th>
+      <th>Activity Date</th>
+      <th>Items</th>
+      <th width="90">Action</th>
+      </thead>
+      <tbody>
+      <tr
+          ng-repeat="ia in ctrl.inactiveCommunities | orderBy:'activityDate'">
+        <td ng-bind="ia.name">Name</td>
+        <td ng-bind="ia.activityDate"></td>
+        <td ng-bind="ia.items"></td>
+        <td>
+        <span ng-if="ia.status == 'started'">
+        <button class="btn btn-xs btn-primary"
+                ng-click="ctrl.setStatus(ia, 'stop')">Stop
+        </button>
+        <button class="btn btn-xs btn-primary"
+                ng-click="ctrl.showLog(ia)">Log
+        </button>
+        </span>
+        <span ng-if="ia.status != 'started'">
+        <button class="btn btn-xs btn-primary"
+                ng-click="ctrl.setStatus(ia, 'start')">Start
+        </button>
+        </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <button class="btn btn-default pull-right"
+            ng-click="ctrl.close()">
+      <i class="glyphicon glyphicon-remove-circle"></i>
+    </button>
+    <h3 class="modal-title">Log</h3>
+  </div>
+  <div class="modal-body"  style="height: 400px; overflow: scroll">
+    <table class="table table-striped">
+      <tbody>
+      <tr ng-repeat="entry in ctrl.logEntries">
+        <td width="20%"
+            ng-bind="::entry.timestamp">timestamp that is long</td>
+        <td ng-bind="::entry.msg">this is where a message would
+          go with a lot of space</td>
+      </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li ng-repeat="item in ctrl.items">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+</script>
