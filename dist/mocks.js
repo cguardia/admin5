@@ -66,7 +66,7 @@
       [
         {
           method: 'POST',
-          pattern: /api\/to_archive\/(\d+)\/setStatus/,
+          pattern: /arc2box\/communities\/(\d+)\/setStatus/,
           responder: function (method, url, data) {
             // Given /api/to_archive/someDocId/setStatus
             // - Grab that community
@@ -85,7 +85,7 @@
         },
         {
           method: 'GET',
-          pattern: /api\/to_archive\/(\d+)\/logEntries/,
+          pattern: /arc2box\/communities\/(\d+)\/logEntries/,
           responder: function () {
             // Each time called, make up 5 entries and put them
             // in the front of the array, to simulate the server
