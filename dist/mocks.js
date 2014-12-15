@@ -117,7 +117,7 @@
             var params = getParams(url);
             var filtered = _(communities).clone();
 
-            if (params.inactive == 'true') {
+            if (params.last_activity) {
               filtered = _(communities).filter(
                 function (item) {
                   return item.last_activity.indexOf('2014') != 0;
@@ -125,11 +125,11 @@
               ).value();
             }
 
-            if (params.filterText) {
-              var ft = params.filterText.toLowerCase();
+            if (params.filter) {
+              var ft = params.filter.toLowerCase();
               filtered = _(filtered).filter(
                 function (item) {
-                  var orig = item.name.toLowerCase();
+                  var orig = item.title.toLowerCase();
                   return orig.indexOf(ft) > -1;
                 }
               ).value();

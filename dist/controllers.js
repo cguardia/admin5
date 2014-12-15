@@ -1,7 +1,6 @@
 (function () {
 
   function BoxListCtrl(resource, Restangular, $modal) {
-    console.debug(999, resource);
     var _this = this;
     this.inactiveCommunities = resource;
     var baseInactives = Restangular.all('communities');
