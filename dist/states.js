@@ -46,8 +46,8 @@
                    controller: 'BoxListCtrl as ctrl',
                    resolve: {
                      resource: function (Restangular) {
-                       return Restangular.all('to_archive')
-                         .getList({inactive: true});
+                       return Restangular.all('communities')
+                         .getList({last_activity: 540});
                      }
                    }
                  }

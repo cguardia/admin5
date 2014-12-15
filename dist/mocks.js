@@ -21,27 +21,36 @@
 
     var communities = [
       {
-        id: '1', name: 'Default Community', activityDate: '2010/11/19',
-        items: 4723, status: 'none'
+        id: '1', name: 'default',
+        url: '/communities/default',
+        title: 'Default Community', last_activity: '2010/11/19',
+        items: 4723, status: null
       },
       {
-        id: '2', name: 'Another Community', activityDate: '2011/01/09',
-        items: 23, status: 'none'
+        id: '2', name: 'another',
+        url: '/communities/another',
+        title: 'Another Community', last_activity: '2011/01/09',
+        items: 23, status: null
       },
       {
-        id: '3',
-        name: 'Testing 123 With A Long Title That Goes On',
-        activityDate: '2010/03/04',
+        id: '3', name: 'testing',
+        url: '/communities/testing',
+        title: 'Testing 123 With A Long Title That Goes On',
+        last_activity: '2010/03/04',
         items: 7,
-        status: 'none'
+        status: null
       },
       {
-        id: '4', name: 'Africa...it is big', activityDate: '2014/04/16',
-        items: 9999, status: 'none'
+        id: '4', name: 'africa',
+        url: '/communities/africa',
+        title: 'Africa...it is big', last_activity: '2014/04/16',
+        items: 9999, status: null
       },
       {
-        id: '5', name: 'Merica', activityDate: '2014/10/07',
-        items: 548, status: 'none'
+        id: '5', name: 'merica',
+        url: '/communities/merica',
+        title: 'Merica', last_activity: '2014/10/07',
+        items: 548, status: null
       }
     ];
 
@@ -98,7 +107,7 @@
         },
         {
           method: 'GET',
-          pattern: /api\/to_archive.*$/,
+          pattern: /arc2box\/communities.*$/,
           responder: function (method, url) {
             /*
              Process two filters:
@@ -111,7 +120,7 @@
             if (params.inactive == 'true') {
               filtered = _(communities).filter(
                 function (item) {
-                  return item.activityDate.indexO('2014') != 0;
+                  return item.last_activity.indexOf('2014') != 0;
                 }
               ).value();
             }

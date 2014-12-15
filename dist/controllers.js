@@ -1,19 +1,20 @@
 (function () {
 
-  function BoxListCtrl(resource, Restangular, $modal, $scope) {
+  function BoxListCtrl(resource, Restangular, $modal) {
+    console.debug(999, resource);
     var _this = this;
     this.inactiveCommunities = resource;
-    var baseInactives = Restangular.all('to_archive');
+    var baseInactives = Restangular.all('communities');
 
     // Handle filters
-    this.isInactive = true;
+    this.lastActivity = 540;
     this.filterText = null;
     this.reload = function () {
       // User clicked the "Over 18 months" checkbox or the search box
       baseInactives.getList(
         {
-          inactive: this.isInactive,
-          filterText: this.filterText
+          last_activity: this.lastActivity,
+          filter: this.filterText
         }
       )
         .then(function (response) {

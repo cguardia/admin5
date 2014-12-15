@@ -13,32 +13,29 @@
 
 <div class="row">
 
-  <div class="col-md-3">
+  <div class="col-md-2">
 
     <h5 class="text-muted">Filters</h5>
 
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"
-               ng-model="ctrl.isInactive"
-               ng-change="ctrl.reload()"> Only over 18 months
-      </label>
-    </div>
-    <div class="input-group">
-      <input type="text" class="form-control input-xs"
-             ng-model="ctrl.filterText"
-             placeholder="Title contains...">
-
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default"
-                ng-click="ctrl.reload()">
-          <i class="glyphicon glyphicon-search"></i>
-        </button>
+    <form name="filters" ng-submit="ctrl.reload()"
+          class="form-horizonal" role="form">
+      <div class="form-group">
+        <input id="lastActivity"
+               type="text" class="form-control input-xs"
+               ng-model="ctrl.lastActivity"
+               placeholder="Title contains..."> days
       </div>
-      <!-- /btn-group -->
-    </div>
+      <div class="form-group">
+        <input id="filterText"
+               type="text" class="form-control input-xs"
+               ng-model="ctrl.filterText"
+               placeholder="Title contains...">
+      </div>
+      <input class="btn btn-primary" ng-click="ctrl.reload()"
+             type="submit" value="Filter"/>
+    </form>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-10">
     <table class="table table-striped">
       <thead>
       <th>Name</th>
@@ -49,8 +46,8 @@
       <tbody>
       <tr
           ng-repeat="ia in ctrl.inactiveCommunities | orderBy:'activityDate'">
-        <td ng-bind="ia.name">Name</td>
-        <td ng-bind="ia.activityDate"></td>
+        <td ng-bind="ia.title">Name</td>
+        <td ng-bind="ia.last_activity.split('.')[0]"></td>
         <td ng-bind="ia.items"></td>
         <td>
         <span ng-if="ia.status == 'started'">
@@ -81,14 +78,16 @@
     </button>
     <h3 class="modal-title">Log</h3>
   </div>
-  <div class="modal-body"  style="height: 400px; overflow: scroll">
+  <div class="modal-body" style="height: 400px; overflow: scroll">
     <table class="table table-striped">
       <tbody>
       <tr ng-repeat="entry in ctrl.logEntries">
         <td width="20%"
-            ng-bind="::entry.timestamp">timestamp that is long</td>
+            ng-bind="::entry.timestamp">timestamp that is long
+        </td>
         <td ng-bind="::entry.msg">this is where a message would
-          go with a lot of space</td>
+          go with a lot of space
+        </td>
       </tr>
       </tbody>
     </table>
