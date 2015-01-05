@@ -36,7 +36,7 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                  controller: 'BoxListCtrl as ctrl',
                  resolve: {
                    resource: function (Restangular) {
-                     return Restangular.all('communities')
+                     return Restangular.all('arc2box/communities')
                        .getList({last_activity: 540});
                    }
                  }

@@ -1,22 +1,6 @@
-function ModuleConfig(moondashMockRestProvider) {
+var _ = require('lodash');
 
-  function getParams(url) {
-    // This will be replaced with url.js later
-    var params = {};
-    var queryString = url.split("?")[1];
-    if (queryString) {
-      var parts = queryString.split('&');
-      if (!parts) {
-        // Only one argument
-        parts = [queryString];
-      }
-      parts.forEach(function (part) {
-        var p = part.split('=');
-        params[p[0]] = p[1];
-      });
-    }
-    return params;
-  }
+function ModuleConfig(MdMockRestProvider) {
 
   var communities = [
     {
@@ -60,21 +44,24 @@ function ModuleConfig(moondashMockRestProvider) {
     {timestamp: '2014/12/01 09:30:01', msg: '4Some message'}
   ];
 
-  moondashMockRestProvider.addMocks(
+  MdMockRestProvider.addMocks(
     'box',
     [
       {
         method: 'POST',
-        pattern: /api\/to_archive\/(\d+)\/setStatus/,
-        responder: function (method, url, data) {
+        pattern: /arc2box\/communities\/(\d+)\/setStatus/,
+        responder: function (request) {
           // Given /api/to_archive/someDocId/setStatus
           // - Grab that community
           // - Change its status to the passed in 'status' value
           // - return ok
+          var
+            url = request.url,
+            data = request.json_body;
           var id = url.split("/")[3],
             target = _(communities).first({id: id}),
             newStatus = 'stopped';
-          data = angular.fromJson(data);
+          data = request.json_body;
           if (data.status == 'start') {
             newStatus = 'started';
           }
@@ -84,7 +71,7 @@ function ModuleConfig(moondashMockRestProvider) {
       },
       {
         method: 'GET',
-        pattern: /api\/to_archive\/(\d+)\/logEntries/,
+        pattern: /arc2box\/communities\/(\d+)\/logEntries/,
         responder: function () {
           // Each time called, make up 5 entries and put them
           // in the front of the array, to simulate the server
@@ -107,16 +94,20 @@ function ModuleConfig(moondashMockRestProvider) {
       {
         method: 'GET',
         pattern: /arc2box\/communities.*$/,
-        responder: function (method, url) {
+        responder: function (request) {
           /*
            Process two filters:
            - inactive == 'true' or otherwise
            - filterText, lowercase comparison
            */
-          var params = getParams(url);
+          var
+            url = request.url,
+            last_activity = parseInt(request.query.last_activity),
+            filter = request.query.filter;
+
           var filtered = _(communities).clone();
 
-          if (params.inactive == 'true') {
+          if (last_activity < 360) {
             filtered = _(communities).filter(
               function (item) {
                 return item.last_activity.indexOf('2014') != 0;
@@ -124,8 +115,8 @@ function ModuleConfig(moondashMockRestProvider) {
             ).value();
           }
 
-          if (params.filterText) {
-            var ft = params.filterText.toLowerCase();
+          if (filter) {
+            var ft = filter.toLowerCase();
             filtered = _(filtered).filter(
               function (item) {
                 var orig = item.name.toLowerCase();
@@ -141,5 +132,6 @@ function ModuleConfig(moondashMockRestProvider) {
 
 }
 
-angular.module('admin5')
-  .config(ModuleConfig);
+module.exports = {
+  Config: ModuleConfig
+};

@@ -1,7 +1,7 @@
 function BoxListCtrl(resource, Restangular, $modal) {
   var _this = this;
   this.inactiveCommunities = resource;
-  var baseInactives = Restangular.all('communities');
+  var baseInactives = Restangular.all('arc2box/communities');
 
   // Handle filters
   this.lastActivity = 540;
@@ -14,9 +14,14 @@ function BoxListCtrl(resource, Restangular, $modal) {
         filter: this.filterText
       }
     )
-      .then(function (response) {
-              _this.inactiveCommunities = response;
-            });
+      .then(
+      function (success) {
+        _this.inactiveCommunities = success;
+      },
+      function (failure) {
+        console.debug('failure', failure);
+      }
+    );
   };
 
   this.setStatus = function (target, status) {
