@@ -2,18 +2,13 @@
 <html ng-app="admin5">
 <head>
   <meta charset="utf-8">
-  <title>My Site</title>
+  <title ng-bind="layout.pageTitle">Some Title</title>
   <link type="text/css" rel="stylesheet"
         href="http://localhost/projects/MoonshotProject/moondash/build/moondash.css">
   <link type="text/css" rel="stylesheet" href="admin5.css">
 </head>
-<body ng-controller="HelloCtrl as ctrl">
-
-<div class="container">
-  <h1 ng-bind="ctrl.title">Hello Default</h1>
-
-  <p>Simplest possible demo.</p>
-</div>
+<body>
+<div ui-view></div>
 
 <script src="http://localhost/projects/MoonshotProject/moondash/build/moondash-vendors.js"></script>
 <script src="http://localhost/projects/MoonshotProject/moondash/build/moondash.js"></script>
