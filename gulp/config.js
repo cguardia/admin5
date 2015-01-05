@@ -6,7 +6,7 @@ module.exports = {
   browserSync: {
     dev: {
       server: {
-        baseDir: [src],
+        baseDir: [dest],
         directory: true
       },
       open: false,
@@ -19,7 +19,8 @@ module.exports = {
   },
   html: {
     src: [
-      src + '/*.html'
+      src + '/*.html',
+      src + '/*.css'
     ],
     base: './src',
     dest: dest
