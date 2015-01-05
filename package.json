@@ -1,13 +1,22 @@
 {
-    "name": "admin5",
-    "description": "KARL admin UI",
-    "version": "0.1.0-alpha",
-    "author": "The KARL Team",
-    "engines": [
-        "node"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:karlproject/admin5.git"
-    }
+  "name": "admin5",
+  "description": "KARL admin UI",
+  "version": "0.1.0-alpha",
+  "author": "The KARL Team",
+  "engines": [
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:karlproject/admin5.git"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.8.3",
+    "browserify": "^8.0.3",
+    "gulp-notify": "^2.1.0",
+    "gulp-util": "^3.0.1",
+    "partialify": "^3.1.2",
+    "pretty-hrtime": "^1.0.0",
+    "require-dir": "^0.1.0"
+  }
 }
