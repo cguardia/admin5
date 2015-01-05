@@ -172,7 +172,6 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                }
              }
            })
-
     .state('admin.email', {
              url: '/email',
              title: 'Email',

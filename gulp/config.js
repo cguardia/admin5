@@ -15,17 +15,6 @@ module.exports = {
         // Exclude Map files
         '!' + dest + '/**.map'
       ]
-    },
-    prod: {
-      // Simulate getting Moondash from CDN or outside.
-      // Need something that sets CORS so use browsersync
-      port: 3001,
-      server: {
-        baseDir: ['../../MoonShotProject/moondash'],
-        directory: true
-      },
-      open: false,
-      files: []
     }
   },
   html: {
