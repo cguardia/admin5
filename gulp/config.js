@@ -1,19 +1,20 @@
 var
   src = './src',
-  dest = './build';
+  build = './build',
+  dist = './dist';
 
 module.exports = {
   browserSync: {
     dev: {
       server: {
-        baseDir: [dest],
+        baseDir: [build],
         directory: true
       },
       open: false,
       files: [
-        dest + '/**',
+        build + '/**',
         // Exclude Map files
-        '!' + dest + '/**.map'
+        '!' + build + '/**.map'
       ]
     }
   },
@@ -23,7 +24,7 @@ module.exports = {
       src + '/*.css'
     ],
     base: './src',
-    dest: dest
+    build: build
   },
   browserify: {
     // Enable source maps
@@ -32,8 +33,12 @@ module.exports = {
     // bundle config in the list below
     bundleConfigs: [{
       entries: src + '/module.js',
-      dest: dest,
+      dest: build,
       outputName: 'admin5.js'
     }]
+  },
+  dist: {
+    src: [build + '/*'],
+    dest: dist
   }
 };
