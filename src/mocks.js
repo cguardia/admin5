@@ -104,7 +104,6 @@ function ModuleConfig(MdMockRestProvider) {
            - filterText, lowercase comparison
            */
           var
-            url = request.url,
             last_activity = parseInt(request.query.last_activity),
             filter = request.query.filter;
 

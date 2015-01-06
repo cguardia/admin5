@@ -10,6 +10,8 @@ def includeme(config):
     config.add_static_view(name='admin5', path='admin5:../dist',
                            permission='administer')
 
+    config.include('.rest_api')
+
 
 def main(global_config, **settings):
     # This is the dummy mode for running outside of KARL
@@ -22,6 +24,6 @@ def main(global_config, **settings):
     config.include('.mock_rest_api')
 
     # Handle CORS
-    config.include('.subscribers')
+    config.include('.cors')
 
     return config.make_wsgi_app()

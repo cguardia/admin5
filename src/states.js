@@ -17,7 +17,6 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                  controllerAs: 'ctrl',
                  resolve: {
                    resource: function (Restangular) {
-                     console.log('resolving home view');
                      return Restangular.one('api').get();
                    }
                  }

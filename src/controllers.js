@@ -1,5 +1,4 @@
 function HomeController (resource) {
-  console.log('items 3923', resource);
 }
 
 function BoxListController(resource, Restangular, $modal) {
