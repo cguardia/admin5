@@ -1,4 +1,8 @@
-function BoxListCtrl(resource, Restangular, $modal) {
+function HomeController (resource) {
+  console.log('items 3923', resource);
+}
+
+function BoxListController(resource, Restangular, $modal) {
   var _this = this;
   this.inactiveCommunities = resource;
   var baseInactives = Restangular.all('arc2box/communities');
@@ -42,7 +46,8 @@ function BoxListCtrl(resource, Restangular, $modal) {
     var modalInstance = $modal.open(
       {
         templateUrl: 'myModalContent.html',
-        controller: 'ModalCtrl as ctrl',
+        controller: ModalController,
+        controllerAs: 'ctrl',
         size: 'lg',
         resolve: {
           target: function () {
@@ -51,10 +56,9 @@ function BoxListCtrl(resource, Restangular, $modal) {
         }
       });
   }
-
 }
 
-function ModalCtrl($modalInstance, target, $timeout, $scope) {
+function ModalController($modalInstance, target, $timeout, $scope) {
   var _this = this;
   this.logEntries = [];
   this.updateLog = function () {
@@ -88,6 +92,8 @@ function ModalCtrl($modalInstance, target, $timeout, $scope) {
   };
 }
 
-angular.module('admin5')
-  .controller('ModalCtrl', ModalCtrl)
-  .controller('BoxListCtrl', BoxListCtrl);
+module.exports = {
+  HomeController: HomeController,
+  ModalController: ModalController,
+  BoxListController: BoxListController
+};

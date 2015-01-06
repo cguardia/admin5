@@ -8,7 +8,10 @@ def add_cors_headers_response_callback(event):
         if 'Origin' in request.headers:
             origin = request.headers['Origin']
             if origin in ALLOWED_ORIGIN:
-                response.headers['Access-Control-Allow-Origin'] = origin
+                response.headers.update({
+                    'Access-Control-Allow-Origin': origin,
+                    'Access-Control-Allow-Headers': 'Authorization'
+                })
 
     event.request.add_response_callback(cors_headers)
 

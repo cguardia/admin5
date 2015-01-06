@@ -1,3 +1,6 @@
+
+var controllers = require('./controllers');
+
 function ModuleConfig($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
   $stateProvider
@@ -9,7 +12,15 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
              title: 'Home',
              views: {
                'md-content@root': {
-                 template: require('./templates/home.html')
+                 template: require('./templates/home.html'),
+                 controller: controllers.HomeController,
+                 controllerAs: 'ctrl',
+                 resolve: {
+                   resource: function (Restangular) {
+                     console.log('resolving home view');
+                     return Restangular.one('api').get();
+                   }
+                 }
                }
              }
            })
@@ -33,7 +44,8 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
              views: {
                'md-content@root': {
                  template: require('./templates/box_list.html'),
-                 controller: 'BoxListCtrl as ctrl',
+                 controller: controllers.BoxListController,
+                 controllerAs: 'ctrl',
                  resolve: {
                    resource: function (Restangular) {
                      return Restangular.all('arc2box/communities')
@@ -186,7 +198,14 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
            })
 }
 
-function ModuleRun(MdConfig, MdNav) {
+function ModuleRun(Restangular, MdConfig, MdNav) {
+  // If we are using mocks, don't set a prefix. Otherwise, set one.
+  var useMocks = angular.element(document.body).hasClass('a5-use-mocks');
+  if (!useMocks) {
+    Restangular.setBaseUrl('http://localhost:6543');
+  }
+
+
   MdConfig.site.name = 'KARL admin5';
   var siteConfig = {
     'items': {
