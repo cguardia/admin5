@@ -2,6 +2,9 @@ var _ = require('lodash');
 
 function ModuleConfig(MdMockRestProvider) {
 
+  var useMocks = angular.element(document.body).hasClass('a5-use-mocks');
+  if (!useMocks) return;
+
   var communities = [
     {
       id: '1', name: 'default',
