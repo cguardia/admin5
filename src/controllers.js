@@ -1,4 +1,4 @@
-function HomeController (resource) {
+function HomeController() {
 }
 
 function BoxListController(resource, Restangular, $modal) {
@@ -11,12 +11,15 @@ function BoxListController(resource, Restangular, $modal) {
   this.filterText = null;
   this.reload = function () {
     // User clicked the "Over 18 months" checkbox or the search box
-    baseInactives.getList(
-      {
-        last_activity: this.lastActivity,
-        filter: this.filterText
-      }
-    )
+    var params = {};
+    // Only send query string parameters if they are not null
+    if (this.lastActivity) {
+      params.last_activity = this.lastActivity;
+    }
+    if (this.filterText) {
+      params.filter = this.filterText;
+    }
+    baseInactives.getList(params)
       .then(
       function (success) {
         _this.inactiveCommunities = success;

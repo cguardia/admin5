@@ -14,12 +14,7 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                'md-content@root': {
                  template: require('./templates/home.html'),
                  controller: controllers.HomeController,
-                 controllerAs: 'ctrl',
-                 resolve: {
-                   resource: function (Restangular) {
-                     return Restangular.one('api').get();
-                   }
-                 }
+                 controllerAs: 'ctrl'
                }
              }
            })
