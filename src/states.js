@@ -41,9 +41,12 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                  controller: controllers.BoxListController,
                  controllerAs: 'ctrl',
                  resolve: {
-                   resource: function (Restangular) {
+                   lastActivity: function () {
+                     return 0
+                   },
+                   resource: function (lastActivity, Restangular) {
                      return Restangular.all('arc2box/communities')
-                       .getList({last_activity: 540});
+                       .getList({last_activity: lastActivity});
                    }
                  }
                }

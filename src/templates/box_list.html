@@ -41,6 +41,7 @@
       <th>Name</th>
       <th>Activity Date</th>
       <th>Items</th>
+      <th>Status</th>
       <th width="90">Action</th>
       </thead>
       <tbody>
@@ -50,18 +51,21 @@
         <td ng-bind="ia.last_activity.split('.')[0]"></td>
         <td ng-bind="ia.items"></td>
         <td>
-        <span ng-if="ia.status == 'started'">
-        <button class="btn btn-xs btn-primary"
-                ng-click="ctrl.setStatus(ia, 'stop')">Stop
-        </button>
-        <button class="btn btn-xs btn-primary"
-                ng-click="ctrl.showLog(ia)">Log
-        </button>
+          <span ng-if="it.status == null">default</span>
+        </td>
+        <td>
+        <span ng-if="ia.status == null">
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.setStatus(ia, 'copy')">Copy
+            </button>
         </span>
-        <span ng-if="ia.status != 'started'">
-        <button class="btn btn-xs btn-primary"
-                ng-click="ctrl.setStatus(ia, 'start')">Start
-        </button>
+        <span ng-if="ia.status == 'copying' || ia.status == 'reviewing'">
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.setStatus(ia, 'stop')">Stop
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.showLog(ia)">Log
+            </button>
         </span>
         </td>
       </tr>

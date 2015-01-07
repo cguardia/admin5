@@ -1,13 +1,13 @@
 function HomeController() {
 }
 
-function BoxListController(resource, Restangular, $modal) {
+function BoxListController(lastActivity, resource, Restangular, $modal) {
   var _this = this;
   this.inactiveCommunities = resource;
   var baseInactives = Restangular.all('arc2box/communities');
 
   // Handle filters
-  this.lastActivity = 540;
+  this.lastActivity = lastActivity;
   this.filterText = null;
   this.reload = function () {
     // User clicked the "Over 18 months" checkbox or the search box
@@ -22,6 +22,7 @@ function BoxListController(resource, Restangular, $modal) {
     baseInactives.getList(params)
       .then(
       function (success) {
+        console.log('suc', success);
         _this.inactiveCommunities = success;
       },
       function (failure) {

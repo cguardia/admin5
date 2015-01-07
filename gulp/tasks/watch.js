@@ -8,4 +8,5 @@ gulp.task('setWatch', function() {
 
 gulp.task('watch', ['setWatch', 'browserSync'], function () {
   gulp.watch(config.html.src, ['html']);
+  gulp.watch(config.dist.src, ['dist'])
 });
