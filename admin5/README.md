@@ -9,7 +9,7 @@ Doing so will:
 - Make a new URL appear at ``/admin5/`` which puts out a static view of 
   stuff under ``dist``
   
-- Provide the REST API, in ``rest_api.py``
+- Provide the REST API, in ``rest_api.py``, for stuff not in KARL already
 
 == Development Mode Outside KARL
 
