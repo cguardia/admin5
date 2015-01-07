@@ -1,9 +1,9 @@
 from setuptools import setup
 
-requires = [
-    'pyramid',
-]
-
-setup(name='admin5',
-      install_requires=requires,
+setup(
+    name='admin5',
+    entry_points="""\
+      [paste.app_factory]
+      main = admin5:main
+      """
 )

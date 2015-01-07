@@ -1,13 +1,38 @@
 {
-    "name": "admin5",
-    "description": "KARL admin UI",
-    "version": "0.1.0-alpha",
-    "author": "The KARL Team",
-    "engines": [
-        "node"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:karlproject/admin5.git"
-    }
+  "name": "admin5",
+  "description": "KARL admin UI",
+  "version": "0.1.0-alpha",
+  "author": "The KARL Team",
+  "engines": [
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:karlproject/admin5.git"
+  },
+  "browser": {
+    "angular": "./node_modules/angular/angular.js"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "angular": "global:angular",
+    "lodash": "global:_"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.8.3",
+    "browserify": "^8.0.3",
+    "browserify-shim": "^3.8.2",
+    "gulp-notify": "^2.1.0",
+    "gulp-util": "^3.0.1",
+    "partialify": "^3.1.2",
+    "pretty-hrtime": "^1.0.0",
+    "require-dir": "^0.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.3.8"
+  }
 }

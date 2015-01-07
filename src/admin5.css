@@ -1,0 +1,13 @@
+#reload {
+    margin-top: 2em;
+}
+
+input#lastActivity {
+    display: inline-block;
+    width: 50px;
+}
+
+input#filterText {
+    display: inline-block;
+    width: 120px;
+}
