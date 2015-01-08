@@ -1,4 +1,3 @@
-
 var controllers = require('./controllers');
 
 function ModuleConfig($stateProvider, $urlRouterProvider) {
@@ -41,14 +40,43 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                  controller: controllers.BoxListController,
                  controllerAs: 'ctrl',
                  resolve: {
+                   token: function ($http, $state) {
+                     var url = '/arc2box/token?invalid';
+                     return $http.get(url)
+                       .success(function (success) {
+                                  var valid = success.valid;
+                                  if (!valid) {
+                                    var url = success.url;
+                                    $state.go('admin.box_login', {url: url});
+                                    console.debug('need to redirect');
+                                  }
+                                })
+                       .error(function (error) {
+                                console.debug('resolve validToken error');
+                              });
+                   },
                    lastActivity: function () {
                      return 0
                    },
-                   resource: function (lastActivity, Restangular) {
+                   communities: function (lastActivity, Restangular) {
                      return Restangular.all('arc2box/communities')
                        .getList({last_activity: lastActivity});
                    }
                  }
+               }
+             }
+           })
+    .state('admin.box_login', {
+             url: '/box_login',
+             title: 'Box Login',
+             params: {
+               url: ''
+             },
+             views: {
+               'md-content@root': {
+                 template: require('./templates/box_login.html'),
+                 controller: controllers.BoxLoginController,
+                 controllerAs: 'ctrl'
                }
              }
            })

@@ -1,9 +1,14 @@
 function HomeController() {
 }
 
-function BoxListController(lastActivity, resource, Restangular, $modal, $http) {
+function BoxLoginController($stateParams) {
+  this.loginUrl = $stateParams.url;
+}
+
+function BoxListController(lastActivity, communities, Restangular, $modal, $http) {
   var _this = this;
-  this.inactiveCommunities = resource;
+
+  this.inactiveCommunities = communities;
   var baseInactives = Restangular.all('arc2box/communities');
 
   // Handle filters
@@ -40,8 +45,8 @@ function BoxListController(lastActivity, resource, Restangular, $modal, $http) {
         target.status = success.status;
       })
       .error(
-      function (failure) {
-        console.debug('failed', failure);
+      function (error) {
+        console.debug('error', error);
       }
     )
   };
@@ -98,6 +103,7 @@ function ModalController($modalInstance, target, $timeout, $scope, $http) {
 
 module.exports = {
   HomeController: HomeController,
+  BoxLoginController: BoxLoginController,
   ModalController: ModalController,
   BoxListController: BoxListController
 };

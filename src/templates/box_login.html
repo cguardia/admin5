@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-10">
+    <h1>Box Login</h1>
+  </div>
+  <div class="col-md-8">
+    <p>Either you have never logged KARL into Box, or the token Box
+      Box last gave you is now expired or invalid. Please click the
+      button below to log KARL back into Box.</p>
+
+    <div ng-if="ctrl.loginUrl">
+      <a
+          class="btn btn-primary btn-lg"
+          href="{{ctrl.loginUrl}}">
+        Login
+      </a>
+    </div>
+    <div ng-if="!ctrl.loginUrl" class="alert alert-warning">
+      You don't have a Box URL for logging in. This likely happened
+      due to a reload of this page. Click on <code>Archive to
+      Box</code> to correct.
+    </div>
+  </div>
+</div>
