@@ -23,7 +23,7 @@
         <input id="lastActivity"
                type="text" class="form-control input-xs"
                ng-model="ctrl.lastActivity"
-               placeholder="Title contains..."> days
+               placeholder="Activity..."> days
       </div>
       <div class="form-group">
         <input id="filterText"
@@ -38,11 +38,11 @@
   <div class="col-md-10">
     <table class="table table-striped">
       <thead>
-      <th>Name</th>
+      <th>Title</th>
       <th>Activity Date</th>
       <th>Items</th>
-      <th>Status</th>
-      <th width="90">Action</th>
+      <th width="110">Status</th>
+      <th width="160">Action</th>
       </thead>
       <tbody>
       <tr
@@ -51,7 +51,9 @@
         <td ng-bind="ia.last_activity.split('.')[0]"></td>
         <td ng-bind="ia.items"></td>
         <td>
-          <span ng-if="it.status == null">default</span>
+          <span ng-if="ia.status == null">default</span>
+          <span ng-if="ia.status != null"
+                ng-bind="ia.status">default</span>
         </td>
         <td>
         <span ng-if="ia.status == null">
@@ -59,10 +61,26 @@
                     ng-click="ctrl.setStatus(ia, 'copy')">Copy
             </button>
         </span>
-        <span ng-if="ia.status == 'copying' || ia.status == 'reviewing'">
+        <span ng-if="ia.status == 'copying'">
             <button class="btn btn-xs btn-primary"
                     ng-click="ctrl.setStatus(ia, 'stop')">Stop
             </button>
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.showLog(ia)">Log
+            </button>
+        </span>
+        <span ng-if="ia.status == 'reviewing'">
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.setStatus(ia, 'mothball')">Mothball
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.setStatus(ia, 'stop')">Stop
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    ng-click="ctrl.showLog(ia)">Log
+            </button>
+        </span>
+        <span ng-if="ia.status == 'removing'">
             <button class="btn btn-xs btn-primary"
                     ng-click="ctrl.showLog(ia)">Log
             </button>
@@ -87,9 +105,11 @@
       <tbody>
       <tr ng-repeat="entry in ctrl.logEntries">
         <td width="20%"
-            ng-bind="::entry.timestamp">timestamp that is long
+            ng-bind="::entry.timestamp.split('.')[0]">timestamp that is
+          long
         </td>
-        <td ng-bind="::entry.msg">this is where a message would
+        <td ng-bind="::entry.level"></td>
+        <td ng-bind="::entry.message">this is where a message would
           go with a lot of space
         </td>
       </tr>

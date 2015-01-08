@@ -1,7 +1,7 @@
 function HomeController() {
 }
 
-function BoxListController(lastActivity, resource, Restangular, $modal) {
+function BoxListController(lastActivity, resource, Restangular, $modal, $http) {
   var _this = this;
   this.inactiveCommunities = resource;
   var baseInactives = Restangular.all('arc2box/communities');
@@ -13,16 +13,16 @@ function BoxListController(lastActivity, resource, Restangular, $modal) {
     // User clicked the "Over 18 months" checkbox or the search box
     var params = {};
     // Only send query string parameters if they are not null
-    if (this.lastActivity) {
+    if (this.lastActivity || this.lastActivity === 0) {
       params.last_activity = this.lastActivity;
     }
     if (this.filterText) {
       params.filter = this.filterText;
     }
+
     baseInactives.getList(params)
       .then(
       function (success) {
-        console.log('suc', success);
         _this.inactiveCommunities = success;
       },
       function (failure) {
@@ -31,13 +31,15 @@ function BoxListController(lastActivity, resource, Restangular, $modal) {
     );
   };
 
-  this.setStatus = function (target, status) {
-    target.customPOST({status: status}, 'setStatus')
-      .then(
+  this.setStatus = function (target, action) {
+    var url = '/arc2box/communities/' + target.name;
+    $http.patch(url, {action: action})
+      .success(
       function (success) {
         // Update with the returned status
         target.status = success.status;
-      },
+      })
+      .error(
       function (failure) {
         console.debug('failed', failure);
       }
@@ -61,34 +63,33 @@ function BoxListController(lastActivity, resource, Restangular, $modal) {
   }
 }
 
-function ModalController($modalInstance, target, $timeout, $scope) {
+function ModalController($modalInstance, target, $timeout, $scope, $http) {
   var _this = this;
   this.logEntries = [];
   this.updateLog = function () {
-    target.customGET('logEntries', {})
-      .then(
-      function (success) {
-        _this.logEntries = success;
-      },
-      function (failure) {
-        console.debug('failure', failure);
-      }
-    )
+    var url = '/arc2box/communities/' + target.name;
+    $http.get(url)
+      .success(function (success) {
+                 console.log('success 2', success)
+               })
+      .error(function (error) {
+               console.log('failure on getting log entries');
+             });
   };
   this.updateLog();
 
   // Now poll
-  var seconds = 5;
-  var timer = $timeout(
-    function () {
-      _this.updateLog();
-    }, seconds * 1000
-  );
-  $scope.$on(
-    'destroy',
-    function () {
-      $timeout.cancel(timer);
-    });
+  //var seconds = 5;
+  //var timer = $timeout(
+  //  function () {
+  //    _this.updateLog();
+  //  }, seconds * 1000
+  //);
+  //$scope.$on(
+  //  'destroy',
+  //  function () {
+  //    $timeout.cancel(timer);
+  //  });
 
   this.close = function () {
     $modalInstance.dismiss();
