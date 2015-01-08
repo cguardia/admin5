@@ -3,16 +3,6 @@
 from pyramid.config import Configurator
 
 
-def token_view(request):
-    # TODO Temporary view
-
-    response = dict(valid=True)
-    if 'invalid' in request.params:
-        response['valid'] = False
-        response['url'] = 'http://api.box.com/foo'
-    return response
-
-
 def includeme(config):
     # Included from KARL
     config.include('.cors')
@@ -22,10 +12,6 @@ def includeme(config):
                            permission='administer')
 
     config.include('.rest_api')
-
-    # TODO Temporary
-    config.add_route('token_view', '/arc2box/token')
-    config.add_view(token_view, route_name='token_view', renderer='json')
 
 
 def main(global_config, **settings):
