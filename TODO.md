@@ -1,15 +1,7 @@
 = TODO
 
-- Make sure "reload" works appropriately
+- Update osideploy
 
-- start_box
-
-    * Link to it in the UI
-    
-    * Provide a way to clear it
-    
-    * Login to box
-    
 - Get credentials into karl.ini for an app administered by Nat
 
 == Later
