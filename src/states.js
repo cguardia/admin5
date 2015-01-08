@@ -48,7 +48,6 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                                   if (!valid) {
                                     var url = success.url;
                                     $state.go('admin.box_login', {url: url});
-                                    console.debug('need to redirect');
                                   }
                                 })
                        .error(function (error) {
