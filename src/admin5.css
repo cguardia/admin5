@@ -11,3 +11,9 @@ input#filterText {
     display: inline-block;
     width: 120px;
 }
+
+input#limit {
+    display: inline-block;
+    width: 60px;
+}
+

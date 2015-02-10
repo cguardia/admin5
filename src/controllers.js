@@ -5,7 +5,7 @@ function BoxLoginController($stateParams) {
     this.loginUrl = $stateParams.url;
 }
 
-function BoxListController(lastActivity, communities, Restangular, $modal, $http) {
+function BoxListController(lastActivity, limit, communities, Restangular, $modal, $http) {
     var _this = this;
 
     this.inactiveCommunities = communities;
@@ -13,6 +13,7 @@ function BoxListController(lastActivity, communities, Restangular, $modal, $http
 
     // Handle filters
     this.lastActivity = lastActivity;
+    this.limit = limit;
     this.filterText = null;
     this.reload = function () {
         // User clicked the "Over 18 months" checkbox or the search box
@@ -20,6 +21,9 @@ function BoxListController(lastActivity, communities, Restangular, $modal, $http
         // Only send query string parameters if they are not null
         if (this.lastActivity || this.lastActivity === 0) {
             params.last_activity = this.lastActivity;
+        }
+        if (this.limit) {
+            params.limit = this.limit;
         }
         if (this.filterText) {
             params.filter = this.filterText;

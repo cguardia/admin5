@@ -31,8 +31,15 @@
                ng-model="ctrl.filterText"
                placeholder="Title contains...">
       </div>
+      <div class="form-group">
+
+        <input id="limit"
+               type="text" class="form-control input-xs"
+               ng-model="ctrl.limit"
+               placeholder="Limit..."> items
+      </div>
       <input class="btn btn-primary" ng-click="ctrl.reload()"
-             type="submit" value="Filter"/>
+             type="button" value="Filter"/>
     </form>
   </div>
   <div class="col-md-10">
