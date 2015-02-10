@@ -44,9 +44,8 @@ function BoxListController(lastActivity, limit, communities, Restangular, $modal
         var url = '/arc2box/communities/' + target.name;
         $http.patch(url, {action: action})
             .success(
-            function (success) {
-                // Update with the returned status
-                target.status = success.status;
+            function () {
+                _this.reload();
             })
             .error(
             function (error) {

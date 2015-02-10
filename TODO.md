@@ -4,10 +4,6 @@
 
 - Update osideploy with Nat's credentials and update
 
-- Reload automatically when clicking 'start'
-
-- Make "limit" editable
-
 - Get Moondash to fix the sourcemap path missing 'maps'
 
 - 'Manage' screen on arc2box that wipes root['box']`
