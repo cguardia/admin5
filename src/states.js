@@ -226,7 +226,7 @@ function ModuleRun(Restangular, MdConfig, MdNav) {
     // If we are using mocks, don't set a prefix. Otherwise, set one.
     var useMocks = angular.element(document.body).hasClass('a5-use-mocks');
     if (!useMocks) {
-        Restangular.setBaseUrl('http://localhost:6543');
+        Restangular.setBaseUrl('/');
     }
 
 
