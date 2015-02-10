@@ -1,20 +1,18 @@
 = TODO
 
-- Update osideploy
+- Get limit and default to be not zero
 
-- Get credentials into karl.ini for an app administered by Nat
+- Update osideploy with Nat's credentials and update
+
+- Reload automatically when clicking 'start'
+
+- Get Moondash to fix the sourcemap path missing 'maps'
+
+- 'Manage' screen on arc2box that wipes root['box']`
 
 == Later
 
 - Get limit/offset in place
-
-- Get admin5.karlproject.io working in Jekyll with a demo
-
-- Testing
-
-    - unit/midway/e2e
-    
-    - Hooked up to Travis
 
 - JWT security policy
   

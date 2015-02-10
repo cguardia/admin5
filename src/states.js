@@ -55,11 +55,14 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                                               });
                                },
                                lastActivity: function () {
-                                   return 0
+                                   return 600;
+                               },
+                               limit: function () {
+                                   return 50;
                                },
                                communities: function (lastActivity, Restangular) {
                                    return Restangular.all('arc2box/communities')
-                                       .getList({last_activity: lastActivity});
+                                       .getList({last_activity: lastActivity, limit: 50});
                                }
                            }
                        }
