@@ -1,5 +1,6 @@
-#reload {
+#reload, #filter {
     margin-top: 2em;
+    width: 60px !important;
 }
 
 input#lastActivity {

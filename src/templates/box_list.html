@@ -2,13 +2,6 @@
   <div class="col-md-10">
     <h1>Archive to Box</h1>
   </div>
-  <div class="col-md-1">
-    <button id="reload" class="btn btn-default btn-sm"
-            ng-click="ctrl.reload()"
-        >
-      Reload
-    </button>
-  </div>
 </div>
 
 <div class="row">
@@ -38,12 +31,26 @@
                ng-model="ctrl.limit"
                placeholder="Limit..."> items
       </div>
-      <input class="btn btn-primary" ng-click="ctrl.reload()"
-             type="submit" value="Filter"/>
+      <div>
+        <button id="filter" class="btn btn-primary"
+                ng-click="ctrl.reload()"
+                type="submit">
+            <span ng-hide="ctrl.isSubmitting">
+              Filter
+            </span>
+            <span ng-show="ctrl.isSubmitting">
+                <i class="fa fa-spinner fa-spin"></i>
+            </span>
+        </button>
+      </div>
     </form>
   </div>
   <div class="col-md-10">
-    <table class="table table-striped">
+    <div ng-if="ctrl.inactiveCommunities.length==0">
+      <em>No communities matching those criteria</em>
+    </div>
+    <table class="table table-striped"
+           ng-if="ctrl.inactiveCommunities.length>0">
       <thead>
       <th>Title</th>
       <th>Activity Date</th>

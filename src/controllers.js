@@ -16,6 +16,7 @@ function BoxListController(lastActivity, limit, communities, Restangular, $modal
     this.limit = limit;
     this.filterText = null;
     this.reload = function () {
+        _this.isSubmitting = true;
         // User clicked the "Over 18 months" checkbox or the search box
         var params = {};
         // Only send query string parameters if they are not null
@@ -32,6 +33,7 @@ function BoxListController(lastActivity, limit, communities, Restangular, $modal
         baseInactives.getList(params)
             .then(
             function (success) {
+                _this.isSubmitting = false;
                 _this.inactiveCommunities = success;
             },
             function (failure) {
