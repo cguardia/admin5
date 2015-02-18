@@ -94,9 +94,7 @@ function ModalController($modalInstance, target, $http) {
     };
 }
 
-module.exports = {
-    HomeController: HomeController,
-    BoxLoginController: BoxLoginController,
-    ModalController: ModalController,
-    BoxListController: BoxListController
-};
+exports.HomeController = HomeController;
+exports.BoxLoginController = BoxLoginController;
+exports.ModalController = ModalController;
+exports.BoxListController = BoxListController;
