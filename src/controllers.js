@@ -45,6 +45,7 @@ function BoxListController(lastActivity, limit, communities, Restangular, $modal
         $http.patch(url, {action: action})
             .success(
             function () {
+                console.debug('success setting ' + target.name + ' to ' + action);
                 _this.reload();
             })
             .error(
