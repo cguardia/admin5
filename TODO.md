@@ -1,12 +1,11 @@
 = TODO
 
-- Increase the cache size on staging
-
-- Speed up first load by not resolving the promise *and* setting 
-  600/50 to higher numbers
-   
 - Issuing initial and reload requests twice
 
+- Increase the cache size on staging
+
+- Speed up first load by not resolving the promise
+   
 - osideploy supervisord.conf isn't making the arc2box task
 
 - Update osideploy with Nat's credentials and update
