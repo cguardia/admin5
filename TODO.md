@@ -2,8 +2,6 @@
 
 - Hyperlink the title
 
-- Why does it show "Moondash"?
-
 - If the community has a default tool that isn't overview, the URL 
   redirects to the tool (e.g. files) which is gone
 
@@ -23,6 +21,9 @@
 - 'Manage' screen on arc2box that wipes root['box']
 
 - Package admin5 into an egg in the repo
+
+- Moondash: Change src/layout to not pre-store MdConfig.site.name, to 
+  allow re-computation after bootstrapping
 
 == Later
 
