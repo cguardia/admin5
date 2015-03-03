@@ -1,10 +1,5 @@
 = TODO
 
-- Hyperlink the title
-
-- If the community has a default tool that isn't overview, the URL 
-  redirects to the tool (e.g. files) which is gone
-
 - Increase the cache size on staging
 
 - Speed up first load by not resolving the promise *and* setting 

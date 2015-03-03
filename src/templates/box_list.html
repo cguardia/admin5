@@ -61,7 +61,10 @@
       <tbody>
       <tr
           ng-repeat="ia in ctrl.inactiveCommunities | orderBy:'activityDate'">
-        <td ng-bind="ia.title">Name</td>
+        <td>
+          <a ng-href="/communities/{{ia.name}}"
+             ng-bind="ia.title">Title</a>
+        </td>
         <td ng-bind="ia.last_activity.split('.')[0]"></td>
         <td ng-bind="ia.items"></td>
         <td>
