@@ -33,7 +33,6 @@
       </div>
       <div>
         <button id="filter" class="btn btn-primary"
-                ng-click="ctrl.reload()"
                 type="submit">
             <span ng-hide="ctrl.isSubmitting">
               Filter
@@ -46,6 +45,9 @@
     </form>
   </div>
   <div class="col-md-10">
+    <div ng-if="ctrl.isLoading()">
+      <em>Loading inactive communities...</em>
+    </div>
     <div ng-if="ctrl.inactiveCommunities.length==0">
       <em>No communities matching those criteria</em>
     </div>

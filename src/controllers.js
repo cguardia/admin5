@@ -5,15 +5,19 @@ function BoxLoginController($stateParams) {
     this.loginUrl = $stateParams.url;
 }
 
-function BoxListController(lastActivity, limit, communities, Restangular, $modal, $http) {
+function BoxListController(Restangular, $modal, $http) {
     var _this = this;
 
-    this.inactiveCommunities = communities;
+    this.inactiveCommunities = null;
+    this.isLoading = function () {
+        return this.inactiveCommunities === null;
+    };
+
     var baseInactives = Restangular.all('arc2box/communities');
 
     // Handle filters
-    this.lastActivity = lastActivity;
-    this.limit = limit;
+    this.lastActivity = 900;
+    this.limit = 20;
     this.filterText = null;
     this.reload = function () {
         _this.isSubmitting = true;
@@ -41,6 +45,8 @@ function BoxListController(lastActivity, limit, communities, Restangular, $modal
             }
         );
     };
+    // Let's go ahead and load this the first time
+    this.reload();
 
     this.setStatus = function (target, action) {
         var url = '/arc2box/communities/' + target.name;

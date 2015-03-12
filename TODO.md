@@ -1,18 +1,12 @@
 = TODO
 
-- Issuing initial and reload requests twice
-
-- Increase the cache size on staging
-
-- Speed up first load by not resolving the promise
-   
 - osideploy supervisord.conf isn't making the arc2box task
 
 - Update osideploy with Nat's credentials and update
 
-- Get Moondash to fix the sourcemap path missing 'maps'
+- Increase the cache size on staging
 
-- 'Manage' screen on arc2box that wipes root['box']
+- Get Moondash to fix the sourcemap path missing 'maps'
 
 - Package admin5 into an egg in the repo
 
@@ -20,6 +14,8 @@
   allow re-computation after bootstrapping
 
 == Later
+
+- 'Manage' screen on arc2box that wipes root['box']
 
 - Clear exception status
 

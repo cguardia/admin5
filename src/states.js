@@ -53,16 +53,6 @@ function ModuleConfig($stateProvider, $urlRouterProvider) {
                                        .error(function (error) {
                                                   console.debug('resolve validToken error');
                                               });
-                               },
-                               lastActivity: function () {
-                                   return 900;
-                               },
-                               limit: function () {
-                                   return 20;
-                               },
-                               communities: function (lastActivity, Restangular) {
-                                   return Restangular.all('arc2box/communities')
-                                       .getList({last_activity: lastActivity, limit: 20});
                                }
                            }
                        }
