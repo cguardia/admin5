@@ -1,14 +1,12 @@
 = TODO
 
+- Package admin5 into an egg in the repo
+
+- Merge everything
+
 - osideploy supervisord.conf isn't making the arc2box task
 
-- Update osideploy with Nat's credentials and update
-
-- Increase the cache size on staging
-
 - Get Moondash to fix the sourcemap path missing 'maps'
-
-- Package admin5 into an egg in the repo
 
 - Moondash: Change src/layout to not pre-store MdConfig.site.name, to 
   allow re-computation after bootstrapping

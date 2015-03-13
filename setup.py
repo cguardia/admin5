@@ -1,9 +1,8 @@
 from setuptools import setup
 
+__version__ = '0.1'
+
 setup(
-    name='admin5',
-    entry_points="""\
-      [paste.app_factory]
-      main = admin5:main
-      """
+    version=__version__,
+    name='admin5'
 )
