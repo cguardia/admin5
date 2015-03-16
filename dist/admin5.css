@@ -1,0 +1,23 @@
+#reload, #filter {
+    margin-top: 2em;
+    width: 60px !important;
+}
+
+input#lastActivity {
+    display: inline-block;
+    width: 50px;
+}
+
+input#filterText {
+    display: inline-block;
+    width: 120px;
+}
+
+input#limit {
+    display: inline-block;
+    width: 60px;
+}
+
+#arc2box-advanced {
+    margin-top: 2em;
+}
