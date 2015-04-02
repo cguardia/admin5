@@ -4,6 +4,8 @@
 
 - Moondash: Change src/layout to not pre-store MdConfig.site.name, to 
   allow re-computation after bootstrapping
+  
+- Handle "server did not respond" errors
 
 == Later
 
