@@ -1,86 +1,93 @@
 <div class="row">
-  <div class="col-md-10">
-    <h1>Archive to Box</h1>
-  </div>
+    <div class="col-md-10">
+        <h1>Archive to Box</h1>
+    </div>
 </div>
 
 <div class="row">
 
-  <div class="col-md-2">
+    <div class="col-md-2">
 
-    <h5 class="text-muted">Filters</h5>
+        <h5 class="text-muted">Filters</h5>
 
-    <form name="filters" ng-submit="ctrl.reload()"
-          class="form-horizonal" role="form">
-      <div class="form-group">
-        <input id="lastActivity"
-               type="text" class="form-control input-xs"
-               ng-model="ctrl.lastActivity"
-               placeholder="Activity..."> days
-      </div>
-      <div class="form-group">
-        <input id="filterText"
-               type="text" class="form-control input-xs"
-               ng-model="ctrl.filterText"
-               placeholder="Title contains...">
-      </div>
-      <div class="form-group">
+        <form name="filters" ng-submit="ctrl.reload()"
+              class="form-horizonal" role="form">
+            <div class="form-group">
+                <input id="lastActivity"
+                       type="text" class="form-control input-xs"
+                       ng-model="ctrl.lastActivity"
+                       placeholder="Activity..."> days
+            </div>
+            <div class="form-group">
+                <input id="filterText"
+                       type="text" class="form-control input-xs"
+                       ng-model="ctrl.filterText"
+                       placeholder="Title contains...">
+            </div>
+            <div class="form-group">
 
-        <input id="limit"
-               type="text" class="form-control input-xs"
-               ng-model="ctrl.limit"
-               placeholder="Limit..."> items
-      </div>
-      <div>
-        <button id="filter" class="btn btn-primary"
-                type="submit">
+                <input id="limit"
+                       type="text" class="form-control input-xs"
+                       ng-model="ctrl.limit"
+                       placeholder="Limit..."> items
+            </div>
+            <div>
+                <button id="filter" class="btn btn-primary"
+                        type="submit">
             <span ng-hide="ctrl.isSubmitting">
               Filter
             </span>
-            <span ng-show="ctrl.isSubmitting">
+                    <span ng-show="ctrl.isSubmitting">
                 <i class="fa fa-spinner fa-spin"></i>
             </span>
-        </button>
-      </div>
-    </form>
-  </div>
-  <div class="col-md-10">
-    <div ng-if="ctrl.isLoading()">
-      <em>Loading inactive communities...</em>
+                </button>
+            </div>
+        </form>
+        <div style="margin-top: 2em">
+            <button id="clear_exceptions" class="btn"
+                    ng-click="ctrl.clearExceptions()">
+                Clear Exceptions
+            </button>
+
+        </div>
     </div>
-    <div ng-if="ctrl.inactiveCommunities.length==0">
-      <em>No communities matching those criteria</em>
-    </div>
-    <table class="table table-striped"
-           ng-if="ctrl.inactiveCommunities.length>0">
-      <thead>
-      <th>Title</th>
-      <th>Activity Date</th>
-      <th>Items</th>
-      <th width="110">Status</th>
-      <th width="160">Action</th>
-      </thead>
-      <tbody>
-      <tr
-          ng-repeat="ia in ctrl.inactiveCommunities | orderBy:'activityDate'">
-        <td>
-          <a ng-href="/communities/{{ia.name}}"
-             ng-bind="ia.title">Title</a>
-        </td>
-        <td ng-bind="ia.last_activity.split('.')[0]"></td>
-        <td ng-bind="ia.items"></td>
-        <td>
-          <span ng-if="ia.status == null">default</span>
-          <span ng-if="ia.status != null"
-                ng-bind="ia.status">default</span>
-        </td>
-        <td>
+    <div class="col-md-10">
+        <div ng-if="ctrl.isLoading()">
+            <em>Loading inactive communities...</em>
+        </div>
+        <div ng-if="ctrl.inactiveCommunities.length==0">
+            <em>No communities matching those criteria</em>
+        </div>
+        <table class="table table-striped"
+               ng-if="ctrl.inactiveCommunities.length>0">
+            <thead>
+            <th>Title</th>
+            <th>Activity Date</th>
+            <th>Items</th>
+            <th width="110">Status</th>
+            <th width="160">Action</th>
+            </thead>
+            <tbody>
+            <tr
+                    ng-repeat="ia in ctrl.inactiveCommunities | orderBy:'activityDate'">
+                <td>
+                    <a ng-href="/communities/{{ia.name}}"
+                       ng-bind="ia.title">Title</a>
+                </td>
+                <td ng-bind="ia.last_activity.split('.')[0]"></td>
+                <td ng-bind="ia.items"></td>
+                <td>
+                    <span ng-if="ia.status == null">default</span>
+                    <span ng-if="ia.status != null"
+                          ng-bind="ia.status">default</span>
+                </td>
+                <td>
         <span ng-if="ia.status == null">
             <button class="btn btn-xs btn-primary"
                     ng-click="ctrl.setStatus(ia, 'copy')">Copy
             </button>
         </span>
-        <span ng-if="ia.status == 'copying'">
+                    <span ng-if="ia.status == 'copying'">
             <button class="btn btn-xs btn-primary"
                     ng-click="ctrl.setStatus(ia, 'stop')">Stop
             </button>
@@ -88,7 +95,7 @@
                     ng-click="ctrl.showLog(ia)">Log
             </button>
         </span>
-        <span ng-if="ia.status == 'reviewing'">
+                    <span ng-if="ia.status == 'reviewing'">
             <button class="btn btn-xs btn-primary"
                     ng-click="ctrl.setStatus(ia, 'mothball')">Mothball
             </button>
@@ -99,45 +106,45 @@
                     ng-click="ctrl.showLog(ia)">Log
             </button>
         </span>
-        <span ng-if="ia.status == 'removing'">
+                    <span ng-if="ia.status == 'removing'">
             <button class="btn btn-xs btn-primary"
                     ng-click="ctrl.showLog(ia)">Log
             </button>
         </span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 <script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-    <button class="btn btn-default pull-right"
-            ng-click="ctrl.close()">
-      <i class="glyphicon glyphicon-remove-circle"></i>
-    </button>
-    <h3 class="modal-title">Log</h3>
-  </div>
-  <div class="modal-body" style="height: 400px; overflow: scroll">
-    <table class="table table-striped">
-      <tbody>
-      <tr ng-repeat="entry in ctrl.logEntries">
-        <td width="20%"
-            ng-bind="::entry.timestamp.split('.')[0]">timestamp that is
-          long
-        </td>
-        <td ng-bind="::entry.level"></td>
-        <td ng-bind="::entry.message">this is where a message would
-          go with a lot of space
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <ul>
-      <li ng-repeat="item in ctrl.items">
-        {{ item }}
-      </li>
-    </ul>
-  </div>
+    <div class="modal-header">
+        <button class="btn btn-default pull-right"
+                ng-click="ctrl.close()">
+            <i class="glyphicon glyphicon-remove-circle"></i>
+        </button>
+        <h3 class="modal-title">Log</h3>
+    </div>
+    <div class="modal-body" style="height: 400px; overflow: scroll">
+        <table class="table table-striped">
+            <tbody>
+            <tr ng-repeat="entry in ctrl.logEntries">
+                <td width="20%"
+                    ng-bind="::entry.timestamp.split('.')[0]">timestamp that is
+                    long
+                </td>
+                <td ng-bind="::entry.level"></td>
+                <td ng-bind="::entry.message">this is where a message would
+                    go with a lot of space
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li ng-repeat="item in ctrl.items">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
 </script>

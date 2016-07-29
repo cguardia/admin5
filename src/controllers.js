@@ -1,11 +1,11 @@
-function HomeController() {
+function HomeController () {
 }
 
-function BoxLoginController($stateParams) {
+function BoxLoginController ($stateParams) {
     this.loginUrl = $stateParams.url;
 }
 
-function BoxListController(Restangular, $modal, $http) {
+function BoxListController (Restangular, $modal, $http) {
     var _this = this;
 
     this.inactiveCommunities = null;
@@ -36,15 +36,32 @@ function BoxListController(Restangular, $modal, $http) {
 
         baseInactives.getList(params)
             .then(
-            function (success) {
-                _this.isSubmitting = false;
-                _this.inactiveCommunities = success;
-            },
-            function (failure) {
-                console.debug('failure', failure);
-            }
-        );
+                function (success) {
+                    _this.isSubmitting = false;
+                    _this.inactiveCommunities = success;
+                },
+                function (failure) {
+                    console.debug('failure', failure);
+                }
+            );
     };
+
+    this.clearExceptions = function () {
+        var url = '/arc2box/clear_exceptions';
+        $http.post(url)
+            .success(
+                function () {
+                    console.debug('clear exceptions');
+                    _this.reload();
+                })
+            .error(
+                function (error) {
+                    console.debug('clear exceptions error', error);
+                }
+            );
+        return false;
+    };
+
     // Let's go ahead and load this the first time
     this.reload();
 
@@ -52,15 +69,15 @@ function BoxListController(Restangular, $modal, $http) {
         var url = '/arc2box/communities/' + target.name;
         $http.patch(url, {action: action})
             .success(
-            function () {
-                console.debug('success setting ' + target.name + ' to ' + action);
-                _this.reload();
-            })
+                function () {
+                    console.debug('success setting ' + target.name + ' to ' + action);
+                    _this.reload();
+                })
             .error(
-            function (error) {
-                console.debug('error', error);
-            }
-        )
+                function (error) {
+                    console.debug('error', error);
+                }
+            )
     };
 
 
@@ -80,18 +97,18 @@ function BoxListController(Restangular, $modal, $http) {
     }
 }
 
-function ModalController($modalInstance, target, $http) {
+function ModalController ($modalInstance, target, $http) {
     var _this = this;
     this.logEntries = [];
     this.updateLog = function () {
         var url = '/arc2box/communities/' + target.name;
         $http.get(url)
             .success(function (success) {
-                         _this.logEntries = success.log;
-                     })
+                _this.logEntries = success.log;
+            })
             .error(function (error) {
-                       console.log('failure on getting log entries');
-                   });
+                console.log('failure on getting log entries');
+            });
     };
     this.updateLog();
 
